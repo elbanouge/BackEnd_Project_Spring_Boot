@@ -19,6 +19,7 @@ public class AppController {
     public void init() {
 
         try {
+            // add roles
             accountService.createNewRole(new Role(null, "ADMIN"));
             accountService.createNewRole(new Role(null, "USER"));
 
