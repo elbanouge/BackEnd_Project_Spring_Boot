@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,9 +33,19 @@ public class User {
     private Long id;
     @Column(name = "username", unique = true)
     private String username;
+
+    @NotEmpty(message = "Mot de passe obligatoire")
+    @Size(min = 6, max = 100, message = "Mot de passe doit avoir au moins 6 caractères")
     private String password;
+
+    @NotEmpty(message = "Email obligatoire")
+    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$", message = "L'email n'est pas valide")
     private String email;
+
+    @NotEmpty(message = "Le nom ne peut pas être vide")
     private String firstName;
+
+    @NotEmpty(message = "Le prénom ne peut pas être vide")
     private String lastName;
     private String phone;
     private String address;

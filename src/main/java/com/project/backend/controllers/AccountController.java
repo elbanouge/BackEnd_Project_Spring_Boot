@@ -1,9 +1,12 @@
 package com.project.backend.controllers;
 
+import javax.validation.Valid;
+
 import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -43,8 +46,9 @@ public class AccountController {
     }
 
     @PostMapping("addNewUser")
-    public ResponseEntity<User> addNewUser(@RequestBody User user) {
-        return ResponseEntity.ok(accountService.createNewUser(user));
+    public ResponseEntity<User> addNewUser(@Valid @RequestBody User user) {
+        User savedUser = accountService.createNewUser(user);
+        return new ResponseEntity<User>(savedUser, HttpStatus.CREATED);
     }
 
     @PostMapping("addRoleToUser/{username}/{name}")
