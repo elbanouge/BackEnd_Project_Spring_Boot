@@ -15,8 +15,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.project.backend.services.ValidEmail;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,7 +40,7 @@ public class User {
     private String password;
 
     @NotEmpty(message = "Email obligatoire")
-    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$", message = "L'email n'est pas valide")
+    @ValidEmail(message = "Email format is not valid")
     private String email;
 
     @NotEmpty(message = "Le nom ne peut pas être vide")
